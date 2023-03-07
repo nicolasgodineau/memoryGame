@@ -47,27 +47,24 @@ const fetchPokemon = () => {
 };
 // Affichage
 const displayPokemon = (pokemon) => {
-    function shuffle(array) {
-        array.sort(() => Math.random() - 0.5);
-    }
-    shufflePokemon = shuffle(pokemon);
-    const pokemonHTMLString = pokemon
+    pokemon.sort((_) => Math.random() - 0.5);
+    const pokemonHTML = pokemon
         .map((pokemon) => {
             const type = pokemon.types[0]?.type?.name;
             const color = colors[type] || "#F5F5F5";
             return `
-            <article class="card" onclick="clickCard(event)" data-pokename="${pokemon.name}" style="background-color:${color};">
-                <div class="front">
-                </div>
-                <div class="back rotated" style="background-color:${color};">
-                <img src="${pokemon.sprites.front_default}" alt="${pokemon.name}"  />
-                <h2>${pokemon.name}</h2>
-                </div>
-            </article>
-        `;
+          <article class="card" onclick="clickCard(event)" data-pokename="${pokemon.name}" style="background-color:${color};">
+            <div class="front ">
+            </div>
+            <div class="back" style="background-color:${color};">
+            <img class="card-image" src="${pokemon.sprites.front_default}" alt="${pokemon.name}"  />
+            <h2 class="card-title"> ${pokemon.name}</h2>
+            </div>
+        </article>
+    `;
         })
         .join("");
-    pokedex.innerHTML = pokemonHTMLString;
+    pokedex.innerHTML = pokemonHTML;
 };
 
 fetchPokemon();
